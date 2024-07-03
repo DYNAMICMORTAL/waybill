@@ -2,27 +2,27 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from "./client.module.css";
 import styless from "../src/app/page.module.css";
-import { MdOutlineArrowUpward } from 'react-icons/md'; // Importing the icon
-import jsPDF from 'jspdf'; // Importing jsPDF
-import { Base64 } from 'js-base64'; // Importing Base64 from js-base64
+import { MdOutlineArrowUpward } from 'react-icons/md';
+import jsPDF from 'jspdf';
+import { Base64 } from 'js-base64';
 import autoTable from 'jspdf-autotable'
 import html2canvas from 'html2canvas';
 
 interface DataItem {
-  srNo: string; // Changed from serialNumber to srNo to match DeliveryDashboard
-  date: string; // Adding date to match the schema
-  toName: string; // Changed from sender to toName to match DeliveryDashboard
-  branch: string; // Adding branch to match the schema
-  podNo: string; // Changed from waybillNo to podNo to match DeliveryDashboard
-  department: string; // Adding department to match the schema
-  particular: string; // Adding particular to match the schema
-  noOfEnvelopes: string; // Changed from noOfDocuments to noOfEnvelopes to match DeliveryDashboard
+  srNo: string;
+  date: string;
+  toName: string;
+  branch: string;
+  podNo: string;
+  department: string;
+  particular: string;
+  noOfEnvelopes: string;
   weight: string;
   senderName: string;
   rates: string;
-  dpartner:string; // Adding rates to match the schema
-  bluedart: string; // Changed courierCompany to bluedart to match DeliveryDashboard
-  deliveryDate: string; // Adding deliveryDate to match the schema
+  dpartner:string;
+  bluedart: string;
+  deliveryDate: string;
 }
 
 export default function ClientPage() {
@@ -63,7 +63,6 @@ export default function ClientPage() {
       pdf.text(`Created: ${item.date}`, 150, 30);
       pdf.text(`Delivery Date: ${item.deliveryDate}`, 150, 40);
     
-      // From and To details
       pdf.setFontSize(12);
       pdf.text(`From:`, 10, 70);
       pdf.text(`${item.senderName}`, 10, 80);
@@ -113,8 +112,8 @@ export default function ClientPage() {
 // pdf.text('Signature: __________________________', 20, pdf.autoTable.previous.finalY + 40);
 const now = new Date();
 const dateString = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}.${now.getMilliseconds()}`;
-pdf.setTextColor(150); // Grey color
-pdf.setFontSize(10); // Small font size
+pdf.setTextColor(150);
+pdf.setFontSize(10);
 const pageHeight = pdf.internal.pageSize.getHeight();
 pdf.text(dateString, pdf.internal.pageSize.getWidth() - 60, pageHeight - 10); // Adjust X and Y accordingly
     generateAndOpenPDF(pdf);
